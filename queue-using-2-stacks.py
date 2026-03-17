@@ -1,17 +1,31 @@
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
 class Stack:
     def __init__(self):
-        self.data = []
+        self.top = None
+        self._size = 0
 
     def push(self, x):
-        self.data.append(x)
+        new_node = Node(x)
+        new_node.next = self.top
+        self.top = new_node
+        self._size += 1
 
     def pop(self):
-        if not self.data:
+        if self.top is None:
             raise IndexError("stack vazia")
-        return self.data.pop()
+
+        value = self.top.value
+        self.top = self.top.next
+        self._size -= 1
+        return value
 
     def size(self):
-        return len(self.data)
+        return self._size
 
 
 class Queue:
@@ -35,7 +49,6 @@ class Queue:
             self.s1.push(self.s2.pop())
 
         return front
-
 
 
 q = Queue()
